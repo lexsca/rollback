@@ -1,5 +1,9 @@
-import unittest
 import mock
+import sys
+if sys.hexversion < 0x02070000:
+  import unittest2 as unittest
+else:
+  import unittest
 
 from rollback import Rollback
 

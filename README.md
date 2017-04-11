@@ -13,9 +13,25 @@ Both modes can be set to `True` to always rollback. A rollback can also be
 triggered manually by calling `doRollback`. Errors can be supressed by
 setting `raiseError` to `False`.  
 
+If a rollback is triggered, each step is called in a last in, first out
+order (LIFO).  That is, the most recently added step is called first,
+the first step if called last.
+
+## Compatibility
+
+Rollback was tested with the following versions of Python
+* 2.6.9
+* 2.7.13
+* 3.3.6
+* 3.4.6
+* 3.5.3
+* 3.6.1
+
 ## Installation
 
-    python setup.py install
+```
+python setup.py install
+```
 
 ## Example usage
 
@@ -61,4 +77,31 @@ with Rollback(onError=True) as rollback:
   print('do e2')
   rollback.addStep(print, 'undo e2')
   raise RuntimeError('this is re-raised')
+```
+Produces output:
+```
+do a1
+do a2
+undo a2
+undo a1
+do b1
+do b2
+undo b2
+undo b1
+do c1
+do c2
+undo c2
+undo c1
+do d1
+do d2
+undo d2
+undo d1
+do e1
+do e2
+undo e2
+undo e1
+Traceback (most recent call last):
+  File "example.py", line 41, in <module>
+    raise RuntimeError('this is re-raised')
+RuntimeError: this is re-raised
 ```
