@@ -1,10 +1,10 @@
 Rollback
 ========
 
-Simple mechanism for rolling back multiple operations in a predictable way,
-either as a context manager or a standalone instance. By default, errors are
-re-raised, but an explicit mode or call *must* be supplied to trigger a
-rollback.  Valid modes are:
+A simple Pythonic mechanism for rolling back multiple operations in a
+predictable way, either as a context manager or a standalone instance.
+By default, errors are re-raised, but an explicit mode or call *must*
+be supplied to trigger a rollback. Valid modes are:
 
 * `onError`  Boolean when `True` will roll back if an error is raised
 * `onSuccess` Boolean when `True` will roll back if an error is _not_ raised
@@ -17,7 +17,7 @@ If a rollback is triggered, each step is called in a last in, first out
 order (LIFO).  That is, the most recently added step is called first,
 the first step if called last.
 
-## Compatibility
+### Compatibility
 
 Rollback was tested with the following versions of Python
 * 2.6.9
@@ -27,13 +27,13 @@ Rollback was tested with the following versions of Python
 * 3.5.3
 * 3.6.1
 
-## Installation
+### Installation
 
 ```
 python setup.py install
 ```
 
-## Example usage
+### Example usage
 
 ```python
 from __future__ import print_function
