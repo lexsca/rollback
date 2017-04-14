@@ -2,13 +2,13 @@ from setuptools import setup
 
 setup(
   name='rollback',
-  version='1.0.2',
+  version='1.0.3',
   description='Simple rollback mechanism',
   author='Lex Scarisbrick',
   author_email='lex@scarisbrick.org',
   license='MIT',
   classifiers=[
-    'Development Status :: 5 - Production/Stable',
+    'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
     'License :: OSI Approved :: MIT License',
     'Programming Language :: Python :: 2.6',
