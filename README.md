@@ -15,7 +15,7 @@ setting `raiseError` to `False`.
 
 If a rollback is triggered, each step is called in a last in, first out
 order (LIFO).  That is, the most recently added step is called first,
-the first step if called last.
+the first step is called last.
 
 ### Compatibility
 
