@@ -86,6 +86,14 @@ class TestRollback(unittest.TestCase):
       rollback.doRollback()
       self.assertEqual(rollback.steps, [])
 
+  def test_Rollback_doRollback_raises_error(self):
+    with self.assertRaises(TestRollbackError):
+      with Rollback(raiseError=False) as rollback:
+        def doError():
+          raise TestRollbackError('test')
+        rollback.addStep(doError)
+        rollback.doRollback()
+
   def test_Rollback_as_standalone_instance(self):
     rollback = Rollback()
     rollback.addStep(self.mockStep)

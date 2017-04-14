@@ -37,11 +37,24 @@ class Rollback(object):
     raised, all arguments apart from self will be `None`.
     '''
     error = True
+    rollbackError = False
     if exceptionType is None and exceptionValue is None and traceback is None:
       error = False
     if (error and self.onError) or (self.onSuccess and not error):
       self.doRollback()
-    return not self.raiseError
+    # if doRollback is called manually _and_ raiseError is False,
+    # don't suppress errors from the rollback steps that are called.
+    if error and not self.raiseError:
+      frame = traceback
+      while frame.tb_next:
+        frame = frame.tb_next
+        code = frame.tb_frame.f_code
+        print(code)
+        if code.co_filename == __file__ and code.co_name == 'doRollback':
+          rollbackError = True
+          print(staticmethod(self.doRollback))
+          break
+    return False if rollbackError else not self.raiseError
 
   def addStep(self, callback, *args, **kwargs):
     '''
