@@ -49,10 +49,8 @@ class Rollback(object):
       while frame.tb_next:
         frame = frame.tb_next
         code = frame.tb_frame.f_code
-        print(code)
         if code.co_filename == __file__ and code.co_name == 'doRollback':
           rollbackError = True
-          print(staticmethod(self.doRollback))
           break
     return False if rollbackError else not self.raiseError
 
