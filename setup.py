@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
   name='rollback',
-  version='1.0.3',
+  version='1.0.4',
   description='Simple rollback mechanism',
   author='Lex Scarisbrick',
   author_email='lex@scarisbrick.org',
