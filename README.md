@@ -10,10 +10,11 @@ be supplied to trigger a rollback. Valid modes are:
 * `onSuccess` Boolean when `True` will roll back if an error is _not_ raised
 
 Both modes can be set to `True` to always rollback. A rollback can also be
-triggered manually by calling `doRollback`. Errors can be supressed by
-setting `raiseError` to `False`.  Note that errors from rollback steps
-will not be surpressed.  This ensures at a minimum that the calls within
-the context manager _or_ the rollback steps succeeded.
+triggered manually by calling `doRollback`.
+
+Errors can be supressed by setting `raiseError` to `False`.  Note that
+errors from rollback steps will not be surpressed, regardless of the
+`raiseError` setting.
 
 If a rollback is triggered, each step is called in a last in, first out
 order (LIFO).  That is, the most recently added step is called first,
