@@ -12,6 +12,13 @@ class TestRollbackError(Exception):
 
 
 
+class RollbackSubclass(Rollback):
+  def doRollback(self):
+    super(RollbackSubclass, self).doRollback()
+    raise TestRollbackError('test')
+
+
+
 class TestRollback(unittest.TestCase):
   def setUp(self):
     self.mockStep = mock.Mock()
@@ -92,6 +99,11 @@ class TestRollback(unittest.TestCase):
         def doError():
           raise TestRollbackError('test')
         rollback.addStep(doError)
+        rollback.doRollback()
+
+  def test_Rollback_doRollback_raises_error_as_subclass(self):
+    with self.assertRaises(TestRollbackError):
+      with RollbackSubclass(raiseError=False) as rollback:
         rollback.doRollback()
 
   def test_Rollback_as_standalone_instance(self):

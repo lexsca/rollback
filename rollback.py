@@ -48,8 +48,8 @@ class Rollback(object):
       frame = traceback
       while frame.tb_next:
         frame = frame.tb_next
-        code = frame.tb_frame.f_code
-        if code.co_filename == __file__ and code.co_name == 'doRollback':
+        this = frame.tb_frame.f_locals.get('self')
+        if this is self and frame.tb_frame.f_code.co_name == 'doRollback':
           rollbackError = True
           break
     return False if rollbackError else not self.raiseError
