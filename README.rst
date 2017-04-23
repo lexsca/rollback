@@ -1,26 +1,18 @@
 Rollback
 ========
 
-A simple Pythonic mechanism for rolling back multiple operations in a
-predictable way, either as a context manager or a standalone instance.
-By default, errors are re-raised, but an explicit mode or call *must* be
-supplied to trigger a rollback. Valid modes are:
+This is a simple Pythonic mechanism for rolling back multiple operations in a predictable way, usable as a `Link context\ manager https://docs.python.org/3/reference/datamodel.html#with-statement-context-managers` context manager or a standalone instance. By default, errors are re-raised, but an explicit mode or call *must* be supplied to trigger a rollback. Valid modes are:
 
 -  ``onError`` Boolean when ``True`` will roll back if an error is
    raised
 -  ``onSuccess`` Boolean when ``True`` will roll back if an error is
    *not* raised
 
-Both modes can be set to ``True`` to always rollback. A rollback can
-also be triggered manually by calling ``doRollback``.
+Both modes can be set to ``True`` to always rollback. A rollback can also be triggered manually by calling ``doRollback``.  Note that multiple calls to ``doRollback`` will only call the rollback steps once.
 
-Errors can be supressed by setting ``raiseError`` to ``False``. Note
-that errors from rollback steps will not be surpressed, regardless of
-the ``raiseError`` setting.
+Errors can be supressed by setting ``raiseError`` to ``False``. Note that errors from rollback steps will not be surpressed, regardless of the ``raiseError`` setting.
 
-If a rollback is triggered, each step is called in a last in, first out
-order (LIFO). That is, the most recently added step is called first, the
-first step is called last.
+If a rollback is triggered, each step is called in a last in, first out order (LIFO). That is, the most recently added step is called first, the first step is called last.
 
 Compatibility
 ~~~~~~~~~~~~~
