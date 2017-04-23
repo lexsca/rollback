@@ -2,14 +2,14 @@ from setuptools import setup
 
 setup(
   name='rollback',
-  version='1.0.5',
+  version='1.0.6',
   description='Simple rollback mechanism',
   long_description=open('README.rst').read(),
   author='Lex Scarisbrick',
   author_email='lex@scarisbrick.org',
   license='MIT',
   classifiers=[
-    'Development Status :: 4 - Beta',
+    'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Developers',
     'License :: OSI Approved :: MIT License',
     'Programming Language :: Python :: 2',
