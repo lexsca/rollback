@@ -1,7 +1,7 @@
 Rollback
 ========
 
-This is a simple Pythonic mechanism for rolling back multiple operations in a predictable way, usable as a `context manager <https://docs.python.org/3/reference/datamodel.html#with-statement-context-managers>` context manager or a standalone instance. By default, errors are re-raised, but an explicit mode or call *must* be supplied to trigger a rollback. Valid modes are:
+This is a simple Pythonic mechanism for rolling back multiple operations in a predictable way, usable as a `context manager`_ ` context manager or a standalone instance. By default, errors are re-raised, but an explicit mode or call *must* be supplied to trigger a rollback. Valid modes are:
 
 -  ``onError`` Boolean when ``True`` will roll back if an error is
    raised
@@ -117,3 +117,4 @@ Produces output:
       raise RuntimeError('this is re-raised')
   RuntimeError: this is re-raised
 
+.. _context manager: https://docs.python.org/3/reference/datamodel.html#with-statement-context-managers
