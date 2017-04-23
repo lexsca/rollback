@@ -26,6 +26,7 @@ Compatibility
 ~~~~~~~~~~~~~
 
 Rollback was tested with the following versions of Python:
+
 -  2.6.9
 -  2.7.13
 -  3.3.6
@@ -38,10 +39,12 @@ Installation
 
 Install from source:
 
+::
   python setup.py install
 
 Install from PyPI:
 
+::
   pip install rollback
 
 Example usage
