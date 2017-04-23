@@ -40,11 +40,13 @@ Installation
 Install from source:
 
 ::
+
   python setup.py install
 
 Install from PyPI:
 
 ::
+
   pip install rollback
 
 Example usage
