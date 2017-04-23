@@ -31,28 +31,46 @@ class Rollback(object):
     '''
     return self
 
+  @staticmethod
+  def _frames(traceback):
+    '''
+    Returns generator that iterates over frames in a traceback
+    '''
+    frame = traceback
+    while frame.tb_next:
+      frame = frame.tb_next
+      yield frame.tb_frame
+    return
+
+  def _methodInTraceback(self, name, traceback):
+    '''
+    Returns boolean whether traceback contains method from this instance
+    '''
+    foundMethod = False
+    for frame in self._frames(traceback):
+      this = frame.f_locals.get('self')
+      if this is self and frame.f_code.co_name == name:
+        foundMethod = True
+        break
+    return foundMethod
+
   def __exit__(self, exceptionType, exceptionValue, traceback):
     '''
-    Called when exiting context manager block. If no exception was
-    raised, all arguments apart from self will be `None`.
+    Called when exiting a context manager block. If no exception was
+    raised, all arguments apart from self will be `None`. The return
+    value indicates what should happen next if an exception was raised.
+    A value of `True` means an exception should be suppressed and `False`
+    means the exception should be re-raised.
     '''
-    error = True
-    rollbackError = False
-    if exceptionType is None and exceptionValue is None and traceback is None:
-      error = False
+    error = bool(traceback is not None)
+    suppressError = not self.raiseError
     if (error and self.onError) or (self.onSuccess and not error):
       self.doRollback()
-    # if doRollback is called manually _and_ raiseError is False,
-    # don't suppress errors from the rollback steps that are called.
-    if error and not self.raiseError:
-      frame = traceback
-      while frame.tb_next:
-        frame = frame.tb_next
-        this = frame.tb_frame.f_locals.get('self')
-        if this is self and frame.tb_frame.f_code.co_name == 'doRollback':
-          rollbackError = True
-          break
-    return False if rollbackError else not self.raiseError
+    if error and suppressError:
+      # if doRollback is called manually _and_ raiseError is False,
+      # don't suppress error from any rollback steps that are called.
+      suppressError = not self._methodInTraceback('doRollback', traceback)
+    return suppressError
 
   def addStep(self, callback, *args, **kwargs):
     '''
