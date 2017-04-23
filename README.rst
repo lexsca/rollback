@@ -1,7 +1,7 @@
 Rollback
 ========
 
-This is a simple Pythonic mechanism for rolling back multiple operations in a predictable way, usable as a `context manager`_ or a standalone instance (see `Example usage`_ below). By default, errors are re-raised, but an explicit mode or call *must* be supplied to trigger a rollback. Valid modes are:
+This is a simple Pythonic mechanism for rolling back multiple operations in a predictable way, usable as a `context manager`_ or a standalone instance (see `Example usage`_). By default, errors are re-raised, but an explicit mode or call *must* be supplied to trigger a rollback. Valid modes are:
 
 -  ``onError`` Boolean when ``True`` will roll back if an error is
    raised
