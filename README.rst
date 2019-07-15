@@ -19,12 +19,13 @@ Compatibility
 
 Rollback was tested with the following versions of Python:
 
+-  3.7.4
+-  3.6.9
+-  3.5.7
+-  3.4.10
+-  3.3.7
+-  2.7.16
 -  2.6.9
--  2.7.13
--  3.3.6
--  3.4.6
--  3.5.3
--  3.6.1
 
 Installation
 ~~~~~~~~~~~~
