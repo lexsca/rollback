@@ -4,14 +4,14 @@ import pytest
 from rollback import Rollback
 
 
-class TestRollbackError(Exception):
+class RollbackError(Exception):
     pass
 
 
 class RollbackSubclass(Rollback):
     def doRollback(self):
         super(RollbackSubclass, self).doRollback()
-        raise TestRollbackError("test")
+        raise RollbackError("test")
 
 
 class TestRollback:
@@ -22,16 +22,19 @@ class TestRollback:
         self.mockStep = None
 
     def test_Rollback_sets_onError_attribute(self):
-        with Rollback(onSuccess=True, onError=TestRollbackError) as rollback:
-            assert rollback.onError is TestRollbackError
+        sentinel = object()
+        with Rollback(onSuccess=True, onError=sentinel) as rollback:
+            assert rollback.onError is sentinel
 
     def test_Rollback_sets_onSuccess_attribute(self):
-        with Rollback(onError=True, onSuccess=TestRollbackError) as rollback:
-            assert rollback.onSuccess is TestRollbackError
+        sentinel = object()
+        with Rollback(onError=True, onSuccess=sentinel) as rollback:
+            assert rollback.onSuccess is sentinel
 
     def test_Rollback_sets_raiseError_attribute(self):
-        with Rollback(raiseError=TestRollbackError) as rollback:
-            assert rollback.raiseError is TestRollbackError
+        sentinel = object()
+        with Rollback(raiseError=sentinel) as rollback:
+            assert rollback.raiseError is sentinel
 
     def test_Rollback_doRollback_calls_in_reverse_order(self):
         idxMax = 3
@@ -43,21 +46,21 @@ class TestRollback:
         self.mockStep.assert_has_calls(expectedCalls)
 
     def test_Rollback_raises_error_by_default(self):
-        with pytest.raises(TestRollbackError):
+        with pytest.raises(RollbackError):
             with Rollback():
-                raise TestRollbackError("test")
+                raise RollbackError("test")
             raise RuntimeError("should not raise this")
 
     def test_Rollback_does_not_raise_error(self):
-        with pytest.raises(TestRollbackError):
+        with pytest.raises(RollbackError):
             with Rollback(raiseError=False):
                 raise RuntimeError("should not raise this")
-            raise TestRollbackError("test")
+            raise RollbackError("test")
 
     def test_Rollback_does_rollback_onError(self):
         with Rollback(onError=True, raiseError=False) as rollback:
             rollback.addStep(self.mockStep)
-            raise TestRollbackError("test")
+            raise RollbackError("test")
         self.mockStep.assert_called_once_with()
 
     def test_Rollback_does_rollback_onSuccess(self):
@@ -89,17 +92,17 @@ class TestRollback:
             assert rollback.steps == []
 
     def test_Rollback_doRollback_raises_error(self):
-        with pytest.raises(TestRollbackError):
+        with pytest.raises(RollbackError):
             with Rollback(raiseError=False) as rollback:
 
                 def doError():
-                    raise TestRollbackError("test")
+                    raise RollbackError("test")
 
                 rollback.addStep(doError)
                 rollback.doRollback()
 
     def test_Rollback_doRollback_raises_error_as_subclass(self):
-        with pytest.raises(TestRollbackError):
+        with pytest.raises(RollbackError):
             with RollbackSubclass(raiseError=False) as rollback:
                 rollback.doRollback()
 
