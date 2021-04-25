@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: Lint
     env:
-      PYTHONPATH: src
+      PYTHONPATH: .
 
     strategy:
       matrix:
