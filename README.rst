@@ -1,6 +1,23 @@
 Rollback
 ========
 
+.. image:: https://github.com/lexsca/rollback/actions/workflows/checks.yml/badge.svg
+    :target: https://github.com/lexsca/rollback/actions/workflows/checks.yml
+
+.. image:: https://img.shields.io/pypi/v/rollback.svg
+    :target: https://pypi.org/project/rollback/
+
+.. image:: https://img.shields.io/pypi/pyversions/rollback.svg
+    :target: https://pypi.org/project/rollback/
+
+.. image:: https://img.shields.io/github/license/lexsca/rollback.svg
+    :target: https://github.com/lexsca/rollback/blob/master/LICENSE
+
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/psf/black
+
+|
+
 This is a simple Pythonic mechanism for rolling back multiple operations in a predictable way, usable as a `context manager`_ or a standalone instance (see `Example usage`_). By default, errors are re-raised, but an explicit mode or call *must* be supplied to trigger a rollback. Valid modes are:
 
 -  ``onError`` Boolean when ``True`` will roll back if an error is
