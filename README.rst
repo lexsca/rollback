@@ -34,15 +34,7 @@ If a rollback is triggered, each step is called in a last in, first out order (L
 Compatibility
 ~~~~~~~~~~~~~
 
-Rollback was tested with the following versions of Python:
-
--  3.7.4
--  3.6.9
--  3.5.7
--  3.4.10
--  3.3.7
--  2.7.16
--  2.6.9
+Rollback has no external dependencies and is regularly tested with all currently supported versions of cPython.
 
 Installation
 ~~~~~~~~~~~~
