@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="rollback",
-    version="1.0.8",
+    use_scm_version=True,
     description="Simple rollback mechanism",
     long_description=open("README.rst").read(),
     author="Lex Scarisbrick",
@@ -20,6 +20,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     url="https://github.com/lexsca/rollback",
