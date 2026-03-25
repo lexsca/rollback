@@ -1,0 +1,10 @@
+graft tests
+
+prune .github
+prune rollback.egg-info
+
+include README.rst
+include LICENSE
+include pyproject.toml
+
+global-exclude *.py[co] __pycache__ *.*~ .DS_Store .pytest_cache .mypy_cache

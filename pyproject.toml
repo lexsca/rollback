@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rollback"
+dynamic = ["version"]
+requires-python = ">=3.10"
+dependencies = []
+description = "Simple rollback mechanism"
+readme = "README.rst"
+authors = [
+    {"name" = "Lex Scarisbrick", "email" = "lex@scarisbrick.org"},
+]
+license = "MIT"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Documentation = "https://rollback.readthedocs.io/en/latest/"
+Repository = "https://github.com/lexsca/rollback.git"
+Issues = "https://github.com/lexsca/rollback/issues"
+Changelog = "https://github.com/lexsca/rollback/blob/main/CHANGELOG.rst"
+
+[tool.black]
+line-length = 100
+
+[tool.setuptools]
+include-package-data = false
+py-modules = ["rollback"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["rollback*"]
+
+[tool.setuptools_scm]
+# https://setuptools-scm.readthedocs.io/en/latest/extending/#setuptools_scmversion_scheme
+version_scheme = "only-version"
+local_scheme = "no-local-version"

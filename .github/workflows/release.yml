@@ -5,14 +5,14 @@ on:
     types: [created]
 
 jobs:
-  deploy:
+  publish:
 
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v6
       with:
         python-version: '3.x'
 
@@ -26,5 +26,6 @@ jobs:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
       run: |
-        python setup.py sdist bdist_wheel
-        twine upload dist/*
+        python -m build --wheel --sdist --outdir dist
+        twine --strict check dist/*
+        twine --verbose upload dist/*
